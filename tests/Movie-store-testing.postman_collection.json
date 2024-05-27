@@ -86,9 +86,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{BaseUrl}}/movies",
+							"raw": "{{baseurl}}/movies",
 							"host": [
-								"{{BaseUrl}}"
+								"{{baseurl}}"
 							],
 							"path": [
 								"movies"
@@ -144,9 +144,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{BaseUrl}}/movies/{{movieId}}",
+							"raw": "{{baseurl}}/movies/{{movieId}}",
 							"host": [
-								"{{BaseUrl}}"
+								"{{baseurl}}"
 							],
 							"path": [
 								"movies",
@@ -191,9 +191,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BaseUrl}}/movies",
+							"raw": "{{baseurl}}/movies",
 							"host": [
-								"{{BaseUrl}}"
+								"{{baseurl}}"
 							],
 							"path": [
 								"movies"
@@ -233,9 +233,9 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{BaseUrl}}/movies/{{movieId}}",
+							"raw": "{{baseurl}}/movies/{{movieId}}",
 							"host": [
-								"{{BaseUrl}}"
+								"{{baseurl}}"
 							],
 							"path": [
 								"movies",
@@ -265,9 +265,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BaseUrl}}/movies/{{movieId}}",
+							"raw": "{{baseurl}}/movies/{{movieId}}",
 							"host": [
-								"{{BaseUrl}}"
+								"{{baseurl}}"
 							],
 							"path": [
 								"movies",
@@ -297,9 +297,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BaseUrl}}/movies",
+							"raw": "{{baseurl}}/movies",
 							"host": [
-								"{{BaseUrl}}"
+								"{{baseurl}}"
 							],
 							"path": [
 								"movies"
@@ -346,9 +346,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{BaseUrl}}/movies",
+							"raw": "{{baseurl}}/movies",
 							"host": [
-								"{{BaseUrl}}"
+								"{{baseurl}}"
 							],
 							"path": [
 								"movies"
@@ -386,9 +386,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{BaseUrl}}/movies/{{id}}",
+							"raw": "{{baseurl}}/movies/{{id}}",
 							"host": [
-								"{{BaseUrl}}"
+								"{{baseurl}}"
 							],
 							"path": [
 								"movies",
@@ -430,9 +430,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{BaseUrl}}/movies/{{movieId}}",
+							"raw": "{{baseurl}}/movies/{{movieId}}",
 							"host": [
-								"{{BaseUrl}}"
+								"{{baseurl}}"
 							],
 							"path": [
 								"movies",
@@ -462,9 +462,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BaseUrl}}/movies",
+							"raw": "{{baseurl}}/movies",
 							"host": [
-								"{{BaseUrl}}"
+								"{{baseurl}}"
 							],
 							"path": [
 								"movies"
@@ -479,9 +479,9 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{BaseUrl}}/movies/{{movieId}}",
+							"raw": "{{baseurl}}/movies/{{movieId}}",
 							"host": [
-								"{{BaseUrl}}"
+								"{{baseurl}}"
 							],
 							"path": [
 								"movies",
