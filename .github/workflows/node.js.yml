@@ -34,6 +34,20 @@ jobs:
       - name: Make Directory for Results
         run: mkdir -p testResults
 
+      # Start the Node.js application in the background
+      - name: Start Node.js Application
+        run: |
+        
+           npm run dev &
+    
+      # Wait for the application to be fully up and running
+      - name: Wait for Application to Start
+        run: |
+          while ! curl -s http://localhost:3000/api/users > /dev/null; do
+            echo "Waiting for application to start..."
+            sleep 2
+         done
+
       # Run the POSTMAN collection and output to console
       - name: Run POSTMAN Collection to Console
         run: |
