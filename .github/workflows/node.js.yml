@@ -16,11 +16,15 @@ jobs:
         with:
           node-version: '16.x'
 
+      # Install project dependencies
+    - name: Install Dependencies
+      run: npm install
+
       # Install the newman command line utility and also install the html extra reporter
-      - name: Install newman
-        run: |
-          npm install -g newman
-          npm install -g newman-reporter-htmlextra
+    - name: Install newman
+      run: |
+       npm install -g newman
+       npm install -g newman-reporter-htmlextra
 
       # Make directory to upload the test results
       - name: Make Directory for results
