@@ -1,47 +1,51 @@
 name: Test-Build
+
 on:
   push:
     branches:
       - main
+
 jobs:
   test-api:
     runs-on: ubuntu-latest
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
 
-      # INstall Node on the runner
-      - name: Install Node
+    steps:
+      # Check out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      # Install Node.js on the runner
+      - name: Install Node.js
         uses: actions/setup-node@v1
         with:
           node-version: '16.x'
 
       # Install project dependencies
-    - name: Install Dependencies
-      run: npm install
+      - name: Install Dependencies
+        run: npm install
 
-      # Install the newman command line utility and also install the html extra reporter
-    - name: Install newman
-      run: |
-       npm install -g newman
-       npm install -g newman-reporter-htmlextra
+      # Install the newman command line utility and the htmlextra reporter
+      - name: Install newman and htmlextra
+        run: |
+          npm install -g newman
+          npm install -g newman-reporter-htmlextra
 
       # Make directory to upload the test results
-      - name: Make Directory for results
+      - name: Make Directory for Results
         run: mkdir -p testResults
 
-      # Run the POSTMAN collection
-      - name: Run POSTMAN collection to console
+      # Run the POSTMAN collection and output to console
+      - name: Run POSTMAN Collection to Console
         run: |
           newman run ./tests/Movie-store-testing.postman_collection.json
-      
-      # Run the POSTMAN collection to html report
-      - name: Run POSTMAN collection to html report
+
+      # Run the POSTMAN collection and generate html report
+      - name: Run POSTMAN Collection to HTML Report
         run: |
           newman run ./tests/Movie-store-testing.postman_collection.json -r htmlextra,json --reporter-htmlextra-export testResults/htmlreport.html
 
       # Upload the contents of Test Results directory to workspace
-      - name: Output the run Details
+      - name: Output the Run Details
         uses: actions/upload-artifact@v2
         with:
           name: RunReports
