@@ -34,8 +34,9 @@ jobs:
       - name: Run POSTMAN collection to console
         run: |
           newman run ./tests/Movie-store-testing.postman_collection.json
-      # Run the POSTMAN collection
-      - name: Run POSTMAN collection to file
+      
+      # Run the POSTMAN collection to html report
+      - name: Run POSTMAN collection to html report
         run: |
           newman run ./tests/Movie-store-testing.postman_collection.json -r htmlextra,json --reporter-htmlextra-export testResults/htmlreport.html
 
