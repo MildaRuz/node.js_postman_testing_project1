@@ -1,66 +1,21 @@
-name: Test-Build
+name: Automated API Tests
 
-on:
-  push:
-    branches:
-      - main
+on: [push, pull_request]
 
 jobs:
-  test-api:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      # Check out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: Checkout Repository
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-      # Install Node.js on the runner
-      - name: Install Node.js
-        uses: actions/setup-node@v1
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2
         with:
-          node-version: '16.x'
+          node-version: '14'
 
-      # Install project dependencies
-      - name: Install Dependencies
-        run: npm install
+      - name: Install Apidog CLI
+        run: npm install -g apidog-cli
 
-      # Install the newman command line utility and the htmlextra reporter
-      - name: Install newman and htmlextra
-        run: |
-          npm install -g newman
-          npm install -g newman-reporter-htmlextra
-
-      # Make directory to upload the test results
-      - name: Make Directory for Results
-        run: mkdir -p testResults
-
-      # Start the Node.js application in the background
-      - name: Start Node.js Application
-        run: |
-
-          npm run dev &
-
-      # Wait for the application to be fully up and running
-      - name: Wait for Application to Start
-        run: |
-          while ! curl -s http://localhost:3000/api/users > /dev/null; do
-            echo "Waiting for application to start..."
-            sleep 2
-          done
-
-      # Run the POSTMAN collection and output to console
-      - name: Run POSTMAN Collection to Console
-        run: |
-          npm run newman
-
-      # Run the POSTMAN collection and generate html report
-      - name: Run POSTMAN Collection to HTML Report
-        run: |
-          npm run newman -r htmlextra,json --reporter-htmlextra-export testResults/htmlreport.html
-
-      # Upload the contents of Test Results directory to workspace
-      - name: Output the Run Details
-        uses: actions/upload-artifact@v2
-        with:
-          name: RunReports
-          path: testResults
+      - name: Running Test Scenario
+        run: apidog run https://api.apidog.com/api/v1/projects/551373/api-test/ci-config/354476/detail?token=xhh5NlSmy8RW49LNRCDOxt -r html,cli
