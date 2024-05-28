@@ -38,8 +38,5 @@ jobs:
             sleep 2
           done
 
-      - name: Install Apidog CLI
-        run: npm install -g apidog-cli
-
       - name: Running Test Scenario
-        run: apidog run https://api.apidog.com/api/v1/projects/551373/api-test/ci-config/354476/detail?token=xhh5NlSmy8RW49LNRCDOxt -r html,cli
+        run: npm run apidog
