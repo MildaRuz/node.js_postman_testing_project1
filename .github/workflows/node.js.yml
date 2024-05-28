@@ -28,7 +28,7 @@ jobs:
     - name: Start Node.js Application
       run: |
 
-      npm run dev &
+       npm run dev &
 
       # Wait for the application to be fully up and running
     - name: Wait for Application to Start
