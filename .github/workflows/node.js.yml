@@ -14,6 +14,19 @@ jobs:
         with:
           node-version: '14'
 
+      # Start the Node.js application in the background
+      - name: Start Node.js Application
+        run: |
+          npm run dev &
+
+      # Wait for the application to be fully up and running
+      - name: Wait for Application to Start
+        run: |
+          while ! curl -s http://localhost:3000/movies > /dev/null; do
+            echo "Waiting for application to start..."
+            sleep 2
+          done
+
       - name: Install Apidog CLI
         run: npm install -g apidog-cli
 
