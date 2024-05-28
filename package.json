@@ -5,11 +5,13 @@
   "scripts": {
     "newman": "newman run ./tests/Movie-store-testing.postman_collection.json -e ./tests/environments/Test.postman_environment.json",
     "dev": "nodemon server.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "apidog": "apidog run https://api.apidog.com/api/v1/projects/551373/api-test/ci-config/354537/detail?token=xxIrHVK38lomo9jkL6UlB9 https://api.apidog.com/api/v1/projects/551373/api-test/ci-config/354538/detail?token=xFVy7yHyykG91n8ip0lSWK-r html,cli"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "apidog-cli": "^1.3.11",
     "newman": "^6.1.2",
     "nodemon": "^3.1.0"
   },
