@@ -65,9 +65,10 @@ Run the collection to execute the tests.
 
 **Apidog**
 Open Apidog.
-Import the collection from the apidog directory, choose apidog format:
+Import the collection choose apidog format file from the apidog directory:
 <img width="540" alt="ApiDog_import_instruction" src="https://github.com/MildaRuz/node.js_postman_testing_project1/assets/145338483/8bb0cc0b-fdc8-49b6-b41c-db3218567f4e">
 
+and choose 
 Run the collection to execute the tests.
 
 **Running Tests via CLI**
