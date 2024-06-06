@@ -68,8 +68,8 @@ Open Apidog.
 Import the collection choose apidog format file from the apidog directory:
 <img width="440" alt="ApiDog_import_instruction" src="https://github.com/MildaRuz/node.js_postman_testing_project1/assets/145338483/8bb0cc0b-fdc8-49b6-b41c-db3218567f4e">
 
-and choose 
-Run the collection to execute the tests.
+and go to Tests, Movie folder, check one or all scenarios and click Batch Run to execute the tests.
+<img width="440" alt="RunTests_instruction" src="https://github.com/MildaRuz/node.js_postman_testing_project1/assets/145338483/8fad947f-dca1-44e8-80fd-e3ba3c4b4bd7">
 
 **Running Tests via CLI**
 For running tests via CLI, use the following commands.
