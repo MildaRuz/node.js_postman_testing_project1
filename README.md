@@ -2,9 +2,9 @@
 
 Welcome to the **Movie Store** backend testing project! This repository is dedicated to testing the REST API endpoints of the Movie Store application using Postman and Apidog.
 
-<img width="640" alt="Postman_movie_testing" src="https://github.com/MildaRuz/node.js_postman_testing_project1/assets/145338483/c078832f-df62-4fa4-b73a-e10d6864289c">
+<img width="600" alt="Postman_movie_testing" src="https://github.com/MildaRuz/node.js_postman_testing_project1/assets/145338483/c078832f-df62-4fa4-b73a-e10d6864289c">
 
-<img width="640" alt="APIdog_movie_testing" src="https://github.com/MildaRuz/node.js_postman_testing_project1/assets/145338483/42a6dc5b-856c-4ed4-8517-a0e9df447e08">
+<img width="600" alt="APIdog_movie_testing" src="https://github.com/MildaRuz/node.js_postman_testing_project1/assets/145338483/42a6dc5b-856c-4ed4-8517-a0e9df447e08">
 
 ## 📝 Overview
 
@@ -66,7 +66,7 @@ Run the collection to execute the tests.
 **Apidog**
 Open Apidog.
 Import the collection choose apidog format file from the apidog directory:
-<img width="540" alt="ApiDog_import_instruction" src="https://github.com/MildaRuz/node.js_postman_testing_project1/assets/145338483/8bb0cc0b-fdc8-49b6-b41c-db3218567f4e">
+<img width="440" alt="ApiDog_import_instruction" src="https://github.com/MildaRuz/node.js_postman_testing_project1/assets/145338483/8bb0cc0b-fdc8-49b6-b41c-db3218567f4e">
 
 and choose 
 Run the collection to execute the tests.
