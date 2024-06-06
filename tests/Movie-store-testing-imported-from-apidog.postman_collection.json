@@ -1,555 +1,610 @@
 {
-  "info": {
-    "_postman_id": "65708912-8b68-4741-a945-b486a94d1609",
-    "name": "Movie-store-testing-imported-from-apidog",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "34520621"
-  },
-  "item": [
-    {
-      "name": "POST and Delete testing",
-      "item": [
-        {
-          "name": "POST new movie",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "",
-                  "        if (JSON.setEnableBigInt) {",
-                  "          JSON.setEnableBigInt(undefined);",
-                  "        }",
-                  "        const responseData = pm.response.json();",
-                  "const reqData =JSON.parse(pm.request.body.raw)",
-                  "",
-                  "pm.environment.set(\"id\", responseData.id);",
-                  "pm.environment.set(\"title\", reqData.title);",
-                  "pm.environment.set(\"productionDate\", reqData.productionDate);",
-                  "pm.environment.set(\"producer\", reqData.producer);",
-                  "pm.environment.set(\"rating\", reqData.rating);",
-                  "",
-                  "pm.test(\"Response status code is 201\", function () {",
-                  "  pm.response.to.have.status(201);",
-                  "});",
-                  "",
-                  "pm.test(\"Response has the required fields and return what was send in request\", function () {",
-                  "",
-                  "    pm.expect(responseData).to.be.an('object');",
-                  "    pm.expect(responseData).to.have.property('id');",
-                  "    pm.expect(responseData).to.have.property('title').and.equals(reqData.title);",
-                  "    pm.expect(responseData).to.have.property('productionDate').and.equals(reqData.productionDate);",
-                  "    pm.expect(responseData).to.have.property('producer').and.equals(reqData.producer);",
-                  "    pm.expect(responseData).to.have.property('rating').and.equals(reqData.rating);",
-                  "});",
-                  "",
-                  "",
-                  "",
-                  "      "
-                ],
-                "type": "text/javascript",
-                "packages": {}
-              }
-            }
-          ],
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n    \"title\": \"Hachiko\",\n    \"productionDate\": \"2009-06-13\",\n    \"producer\": \"Richard Gere\",\n    \"rating\": 8.5\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "{{BASE_URL}}/movies",
-              "host": ["{{BASE_URL}}"],
-              "path": ["movies"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "GET all movies",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "",
-                  "        if (JSON.setEnableBigInt) {",
-                  "          JSON.setEnableBigInt(undefined);",
-                  "        }",
-                  "        const responseData = pm.response.json();",
-                  "        ",
-                  "  pm.test(\"Response status code is 200\", function () {",
-                  "  pm.response.to.have.status(200);",
-                  "});",
-                  "",
-                  "",
-                  "pm.test(\"Response should be an array with objects and should have the correct movie details\", function () {",
-                  "const environmentId = pm.environment.get(\"id\");",
-                  "const environmentTitle = pm.environment.get(\"title\");",
-                  "const environmentProductionDate = pm.environment.get(\"productionDate\");",
-                  "const environmentProducer = pm.environment.get(\"producer\");",
-                  "const environmentRating = pm.environment.get(\"rating\");",
-                  "",
-                  "    pm.expect(responseData).to.be.an('array');",
-                  "    responseData.forEach((movie) => {",
-                  "    pm.expect(movie.id).to.eql(parseInt(environmentId));",
-                  "    pm.expect(movie.title).to.eql(environmentTitle);",
-                  "    pm.expect(movie.productionDate).to.eql(environmentProductionDate);",
-                  "    pm.expect(movie.producer).to.eql(environmentProducer);",
-                  "    pm.expect(movie.rating).to.eql(parseFloat(environmentRating));",
-                  "});",
-                  "});;",
-                  "      "
-                ],
-                "type": "text/javascript",
-                "packages": {}
-              }
-            }
-          ],
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{BASE_URL}}/movies",
-              "host": ["{{BASE_URL}}"],
-              "path": ["movies"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "GET movie by id",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "\n        if (JSON.setEnableBigInt) {\n          JSON.setEnableBigInt(undefined);\n        }\n        const responseData = pm.response.json();\n\npm.test(\"Response status code is 200\", function () {\n  pm.response.to.have.status(200);\n});\n\n\nconst environmentId = pm.environment.get(\"id\");\nconst environmentTitle = pm.environment.get(\"title\");\nconst environmentProductionDate = pm.environment.get(\"productionDate\");\nconst environmentProducer = pm.environment.get(\"producer\");\nconst environmentRating = pm.environment.get(\"rating\");\n\n\npm.test(\"Response should be an object and should have the correct movie details\", function () {\n    pm.expect(responseData).to.be.an('object');\n    pm.expect(responseData.id).to.eql(parseInt(environmentId));\n    pm.expect(responseData.title).to.eql(environmentTitle);\n    pm.expect(responseData.productionDate).to.eql(environmentProductionDate);\n    pm.expect(responseData.producer).to.eql(environmentProducer);\n    pm.expect(responseData.rating).to.eql(parseFloat(environmentRating));\n});\n      "
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          },
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "{{BASE_URL}}/movies/{{id}}",
-              "host": ["{{BASE_URL}}"],
-              "path": ["movies", "{{id}}"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "DELETE movie by id",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "\n        if (JSON.setEnableBigInt) {\n          JSON.setEnableBigInt(undefined);\n        }\n        pm.test(\"Response status code is 204\", function () {\n    pm.response.to.have.status(204);\n});\n\n\npm.test(\"Response time is within an acceptable range\", function () {\n  pm.expect(pm.response.responseTime).to.be.below(300);\n});\n      "
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "DELETE",
-            "header": [],
-            "url": {
-              "raw": "{{BASE_URL}}/movies/{{id}}",
-              "host": ["{{BASE_URL}}"],
-              "path": ["movies", "{{id}}"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "GET movie by id after del",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "\n        if (JSON.setEnableBigInt) {\n          JSON.setEnableBigInt(undefined);\n        }\n        pm.test(\"Response status code is 404\", function () {\n  pm.response.to.have.status(404);\n});\n      "
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{BASE_URL}}/movies/{{id}}",
-              "host": ["{{BASE_URL}}"],
-              "path": ["movies", "{{id}}"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "GET all movies after del",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "\n        if (JSON.setEnableBigInt) {\n          JSON.setEnableBigInt(undefined);\n        }\n        const responseData = pm.response.json();\n\npm.test(\"Response status code is 200\", function () {\n  pm.response.to.have.status(200);\n});\n\n\n\n\npm.test(\"Response should be an array and should have the correct movie details\", function () {\nconst environmentId = pm.environment.get(\"id\");\nconst environmentTitle = pm.environment.get(\"title\");\nconst environmentProductionDate = pm.environment.get(\"productionDate\");\nconst environmentProducer = pm.environment.get(\"producer\");\nconst environmentRating = pm.environment.get(\"rating\");\n\n    pm.expect(responseData).to.be.an('array');\n    responseData.forEach((movie) => {\n    pm.expect(movie.id).to.eql(parseInt(environmentId));\n    pm.expect(movie.title).to.eql(environmentTitle);\n    pm.expect(movie.productionDate).to.eql(environmentProductionDate);\n    pm.expect(movie.producer).to.eql(environmentProducer);\n    pm.expect(movie.rating).to.eql(parseFloat(environmentRating));\n});\n});\n      "
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{BASE_URL}}/movies",
-              "host": ["{{BASE_URL}}"],
-              "path": ["movies"]
-            }
-          },
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "Get by id and Edit testing",
-      "item": [
-        {
-          "name": "POST new movie",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "\n        if (JSON.setEnableBigInt) {\n          JSON.setEnableBigInt(undefined);\n        }\n        const responseData = pm.response.json()\nconst reqData =JSON.parse(pm.request.body.raw)\n\npm.environment.set(\"id\", responseData.id);\npm.environment.set(\"title\", reqData.title);\npm.environment.set(\"productionDate\", reqData.productionDate);\npm.environment.set(\"producer\", reqData.producer);\npm.environment.set(\"rating\", reqData.rating);\n      "
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n    \"title\": \"Hachiko\",\n    \"productionDate\": \"2009-06-13\",\n    \"producer\": \"Richard Gere\",\n    \"rating\": 8.5\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "{{BASE_URL}}/movies",
-              "host": ["{{BASE_URL}}"],
-              "path": ["movies"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "GET movie by id",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "\n        if (JSON.setEnableBigInt) {\n          JSON.setEnableBigInt(undefined);\n        }\n        const responseData = pm.response.json();\n\npm.test(\"Response status code is 200\", function () {\n  pm.response.to.have.status(200);\n});\n\n\npm.test(\"Response should be an object and should have the correct movie details\", function () {\n    const environmentId = pm.environment.get(\"id\");\n    const environmentTitle = pm.environment.get(\"title\");\n    const environmentProductionDate = pm.environment.get(\"productionDate\");\n    const environmentProducer = pm.environment.get(\"producer\");\n    const environmentRating = pm.environment.get(\"rating\");\n\n    pm.expect(responseData).to.be.an('object');\n    pm.expect(responseData.id).to.eql(parseInt(environmentId));\n    pm.expect(responseData.title).to.eql(environmentTitle);\n    pm.expect(responseData.productionDate).to.eql(environmentProductionDate);\n    pm.expect(responseData.producer).to.eql(environmentProducer);\n    pm.expect(responseData.rating).to.eql(parseFloat(environmentRating));\n});\n      "
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          },
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "{{BASE_URL}}/movies/{{id}}",
-              "host": ["{{BASE_URL}}"],
-              "path": ["movies", "{{id}}"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Edit movie",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "",
-                  "        if (JSON.setEnableBigInt) {",
-                  "          JSON.setEnableBigInt(undefined);",
-                  "        }",
-                  "        const responseData = pm.response.json();",
-                  "const reqData =JSON.parse(pm.request.body.raw)",
-                  "",
-                  "pm.test(\"Response status code is 200\", function () {",
-                  "  pm.response.to.have.status(200);",
-                  "});",
-                  "",
-                  "pm.test(\"Response schema for the updated movie\", function () {",
-                  "",
-                  "   pm.expect(responseData).to.be.an('object');",
-                  "    pm.expect(responseData).to.have.property('id');",
-                  "    pm.expect(responseData).to.have.property('title').and.equals(reqData.title);",
-                  "    pm.expect(responseData).to.have.property('productionDate').and.equals(reqData.productionDate);",
-                  "    pm.expect(responseData).to.have.property('producer').and.equals(reqData.producer);",
-                  "    pm.expect(responseData).to.have.property('rating').and.equals(reqData.rating);",
-                  "});",
-                  "",
-                  "pm.environment.set(\"newRating\", reqData.rating);",
-                  "      "
-                ],
-                "type": "text/javascript",
-                "packages": {}
-              }
-            }
-          ],
-          "request": {
-            "method": "PUT",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n    \"title\": \"Hachiko\",\n    \"productionDate\": \"2009-06-13\",\n    \"producer\": \"Richard Gere\",\n    \"rating\": 9.5\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "{{BASE_URL}}/movies/{{id}}",
-              "host": ["{{BASE_URL}}"],
-              "path": ["movies", "{{id}}"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "GET movie by id after edit",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "",
-                  "        if (JSON.setEnableBigInt) {",
-                  "          JSON.setEnableBigInt(undefined);",
-                  "        }",
-                  "        const responseData = pm.response.json();",
-                  "",
-                  "pm.test(\"Response status code is 200\", function () {",
-                  "  pm.response.to.have.status(200);",
-                  "});",
-                  "",
-                  "pm.test(\"Response should be an object and should have the correct movie details\", function () {",
-                  "    const environmentId = pm.environment.get(\"id\");",
-                  "    const environmentTitle = pm.environment.get(\"title\");",
-                  "    const environmentProductionDate = pm.environment.get(\"productionDate\");",
-                  "    const environmentProducer = pm.environment.get(\"producer\");",
-                  "    const environmentRating = pm.environment.get(\"newRating\");",
-                  "",
-                  "    pm.expect(responseData).to.be.an('object');",
-                  "    pm.expect(responseData.id).to.eql(parseInt(environmentId));",
-                  "    pm.expect(responseData.title).to.eql(environmentTitle);",
-                  "    pm.expect(responseData.productionDate).to.eql(environmentProductionDate);",
-                  "    pm.expect(responseData.producer).to.eql(environmentProducer);",
-                  "    pm.expect(responseData.rating).to.eql(parseFloat(environmentRating));",
-                  "});",
-                  ""
-                ],
-                "type": "text/javascript",
-                "packages": {}
-              }
-            }
-          ],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          },
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "{{BASE_URL}}/movies/{{id}}",
-              "host": ["{{BASE_URL}}"],
-              "path": ["movies", "{{id}}"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "GET all movies after edit",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "",
-                  "        if (JSON.setEnableBigInt) {",
-                  "          JSON.setEnableBigInt(undefined);",
-                  "        }",
-                  "        const responseData = pm.response.json();",
-                  "",
-                  "pm.test(\"Response status code is 200\", function () {",
-                  "  pm.response.to.have.status(200);",
-                  "});",
-                  "",
-                  "",
-                  "pm.test(\"Response should be an array with objects and should have the correct movie details\", function () {",
-                  "const environmentId = pm.environment.get(\"id\");",
-                  "const environmentTitle = pm.environment.get(\"title\");",
-                  "const environmentProductionDate = pm.environment.get(\"productionDate\");",
-                  "const environmentProducer = pm.environment.get(\"producer\");",
-                  "const environmentRating = pm.environment.get(\"newRating\");",
-                  "",
-                  "    pm.expect(responseData).to.be.an('array');",
-                  "    responseData.forEach((movie) => {",
-                  "    pm.expect(movie.id).to.eql(parseInt(environmentId));",
-                  "    pm.expect(movie.title).to.eql(environmentTitle);",
-                  "    pm.expect(movie.productionDate).to.eql(environmentProductionDate);",
-                  "    pm.expect(movie.producer).to.eql(environmentProducer);",
-                  "    pm.expect(movie.rating).to.eql(parseFloat(environmentRating));",
-                  "});",
-                  "});",
-                  "      "
-                ],
-                "type": "text/javascript",
-                "packages": {}
-              }
-            }
-          ],
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{BASE_URL}}/movies",
-              "host": ["{{BASE_URL}}"],
-              "path": ["movies"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "DELETE movie by id",
-          "request": {
-            "method": "DELETE",
-            "header": [],
-            "url": {
-              "raw": "{{BASE_URL}}/movies/{{id}}",
-              "host": ["{{BASE_URL}}"],
-              "path": ["movies", "{{id}}"]
-            }
-          },
-          "response": []
-        }
-      ]
-    }
-  ],
-  "variable": [
-    {
-      "key": "id",
-      "value": 1,
-      "type": "string"
-    },
-    {
-      "key": "title",
-      "value": "Hachiko",
-      "type": "string"
-    },
-    {
-      "key": "productionDate",
-      "value": "2009-06-13",
-      "type": "string"
-    },
-    {
-      "key": "producer",
-      "value": "Richard Gere",
-      "type": "string"
-    },
-    {
-      "key": "rating",
-      "value": 8.5,
-      "type": "string"
-    },
-    {
-      "key": "BASE_URL",
-      "value": "http://localhost:3000"
-    }
-  ]
+	"info": {
+		"_postman_id": "65708912-8b68-4741-a945-b486a94d1609",
+		"name": "Movie-store-testing-imported-from-apidog",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34520621"
+	},
+	"item": [
+		{
+			"name": "POST and Delete testing",
+			"item": [
+				{
+					"name": "POST new movie",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"        if (JSON.setEnableBigInt) {",
+									"          JSON.setEnableBigInt(undefined);",
+									"        }",
+									"        const responseData = pm.response.json();",
+									"const reqData =JSON.parse(pm.request.body.raw)",
+									"",
+									"pm.environment.set(\"id\", responseData.id);",
+									"pm.environment.set(\"title\", reqData.title);",
+									"pm.environment.set(\"productionDate\", reqData.productionDate);",
+									"pm.environment.set(\"producer\", reqData.producer);",
+									"pm.environment.set(\"rating\", reqData.rating);",
+									"",
+									"pm.test(\"Response status code is 201\", function () {",
+									"  pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Response has the required fields and return what was send in request\", function () {",
+									"",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData).to.have.property('id');",
+									"    pm.expect(responseData).to.have.property('title').and.equals(reqData.title);",
+									"    pm.expect(responseData).to.have.property('productionDate').and.equals(reqData.productionDate);",
+									"    pm.expect(responseData).to.have.property('producer').and.equals(reqData.producer);",
+									"    pm.expect(responseData).to.have.property('rating').and.equals(reqData.rating);",
+									"});",
+									"",
+									"",
+									"",
+									"      "
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Hachiko\",\n    \"productionDate\": \"2009-06-13\",\n    \"producer\": \"Richard Gere\",\n    \"rating\": 8.5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/movies",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET all movies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"        if (JSON.setEnableBigInt) {",
+									"          JSON.setEnableBigInt(undefined);",
+									"        }",
+									"        const responseData = pm.response.json();",
+									"        ",
+									"  pm.test(\"Response status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response should be an array with objects and should have the correct movie details\", function () {",
+									"const environmentId = pm.environment.get(\"id\");",
+									"const environmentTitle = pm.environment.get(\"title\");",
+									"const environmentProductionDate = pm.environment.get(\"productionDate\");",
+									"const environmentProducer = pm.environment.get(\"producer\");",
+									"const environmentRating = pm.environment.get(\"rating\");",
+									"",
+									"    pm.expect(responseData).to.be.an('array');",
+									"    responseData.forEach((movie) => {",
+									"    pm.expect(movie.id).to.eql(parseInt(environmentId));",
+									"    pm.expect(movie.title).to.eql(environmentTitle);",
+									"    pm.expect(movie.productionDate).to.eql(environmentProductionDate);",
+									"    pm.expect(movie.producer).to.eql(environmentProducer);",
+									"    pm.expect(movie.rating).to.eql(parseFloat(environmentRating));",
+									"});",
+									"});;",
+									"      "
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/movies",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET movie by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\n        if (JSON.setEnableBigInt) {\n          JSON.setEnableBigInt(undefined);\n        }\n        const responseData = pm.response.json();\n\npm.test(\"Response status code is 200\", function () {\n  pm.response.to.have.status(200);\n});\n\n\nconst environmentId = pm.environment.get(\"id\");\nconst environmentTitle = pm.environment.get(\"title\");\nconst environmentProductionDate = pm.environment.get(\"productionDate\");\nconst environmentProducer = pm.environment.get(\"producer\");\nconst environmentRating = pm.environment.get(\"rating\");\n\n\npm.test(\"Response should be an object and should have the correct movie details\", function () {\n    pm.expect(responseData).to.be.an('object');\n    pm.expect(responseData.id).to.eql(parseInt(environmentId));\n    pm.expect(responseData.title).to.eql(environmentTitle);\n    pm.expect(responseData.productionDate).to.eql(environmentProductionDate);\n    pm.expect(responseData.producer).to.eql(environmentProducer);\n    pm.expect(responseData.rating).to.eql(parseFloat(environmentRating));\n});\n      "
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/movies/{{id}}",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"movies",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE movie by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\n        if (JSON.setEnableBigInt) {\n          JSON.setEnableBigInt(undefined);\n        }\n        pm.test(\"Response status code is 204\", function () {\n    pm.response.to.have.status(204);\n});\n\n\npm.test(\"Response time is within an acceptable range\", function () {\n  pm.expect(pm.response.responseTime).to.be.below(300);\n});\n      "
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/movies/{{id}}",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"movies",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET movie by id after del",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\n        if (JSON.setEnableBigInt) {\n          JSON.setEnableBigInt(undefined);\n        }\n        pm.test(\"Response status code is 404\", function () {\n  pm.response.to.have.status(404);\n});\n      "
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/movies/{{id}}",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"movies",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET all movies after del",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\n        if (JSON.setEnableBigInt) {\n          JSON.setEnableBigInt(undefined);\n        }\n        const responseData = pm.response.json();\n\npm.test(\"Response status code is 200\", function () {\n  pm.response.to.have.status(200);\n});\n\n\n\n\npm.test(\"Response should be an array and should have the correct movie details\", function () {\nconst environmentId = pm.environment.get(\"id\");\nconst environmentTitle = pm.environment.get(\"title\");\nconst environmentProductionDate = pm.environment.get(\"productionDate\");\nconst environmentProducer = pm.environment.get(\"producer\");\nconst environmentRating = pm.environment.get(\"rating\");\n\n    pm.expect(responseData).to.be.an('array');\n    responseData.forEach((movie) => {\n    pm.expect(movie.id).to.eql(parseInt(environmentId));\n    pm.expect(movie.title).to.eql(environmentTitle);\n    pm.expect(movie.productionDate).to.eql(environmentProductionDate);\n    pm.expect(movie.producer).to.eql(environmentProducer);\n    pm.expect(movie.rating).to.eql(parseFloat(environmentRating));\n});\n});\n      "
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/movies",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"movies"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Get by id and Edit testing",
+			"item": [
+				{
+					"name": "POST new movie",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\n        if (JSON.setEnableBigInt) {\n          JSON.setEnableBigInt(undefined);\n        }\n        const responseData = pm.response.json()\nconst reqData =JSON.parse(pm.request.body.raw)\n\npm.environment.set(\"id\", responseData.id);\npm.environment.set(\"title\", reqData.title);\npm.environment.set(\"productionDate\", reqData.productionDate);\npm.environment.set(\"producer\", reqData.producer);\npm.environment.set(\"rating\", reqData.rating);\n      "
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Hachiko\",\n    \"productionDate\": \"2009-06-13\",\n    \"producer\": \"Richard Gere\",\n    \"rating\": 8.5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/movies",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET movie by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\n        if (JSON.setEnableBigInt) {\n          JSON.setEnableBigInt(undefined);\n        }\n        const responseData = pm.response.json();\n\npm.test(\"Response status code is 200\", function () {\n  pm.response.to.have.status(200);\n});\n\n\npm.test(\"Response should be an object and should have the correct movie details\", function () {\n    const environmentId = pm.environment.get(\"id\");\n    const environmentTitle = pm.environment.get(\"title\");\n    const environmentProductionDate = pm.environment.get(\"productionDate\");\n    const environmentProducer = pm.environment.get(\"producer\");\n    const environmentRating = pm.environment.get(\"rating\");\n\n    pm.expect(responseData).to.be.an('object');\n    pm.expect(responseData.id).to.eql(parseInt(environmentId));\n    pm.expect(responseData.title).to.eql(environmentTitle);\n    pm.expect(responseData.productionDate).to.eql(environmentProductionDate);\n    pm.expect(responseData.producer).to.eql(environmentProducer);\n    pm.expect(responseData.rating).to.eql(parseFloat(environmentRating));\n});\n      "
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/movies/{{id}}",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"movies",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit movie",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"        if (JSON.setEnableBigInt) {",
+									"          JSON.setEnableBigInt(undefined);",
+									"        }",
+									"        const responseData = pm.response.json();",
+									"const reqData =JSON.parse(pm.request.body.raw)",
+									"",
+									"pm.test(\"Response status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response schema for the updated movie\", function () {",
+									"",
+									"   pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData).to.have.property('id');",
+									"    pm.expect(responseData).to.have.property('title').and.equals(reqData.title);",
+									"    pm.expect(responseData).to.have.property('productionDate').and.equals(reqData.productionDate);",
+									"    pm.expect(responseData).to.have.property('producer').and.equals(reqData.producer);",
+									"    pm.expect(responseData).to.have.property('rating').and.equals(reqData.rating);",
+									"});",
+									"",
+									"pm.environment.set(\"newRating\", reqData.rating);",
+									"      "
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Hachiko\",\n    \"productionDate\": \"2009-06-13\",\n    \"producer\": \"Richard Gere\",\n    \"rating\": 9.5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/movies/{{id}}",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"movies",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET movie by id after edit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"        if (JSON.setEnableBigInt) {",
+									"          JSON.setEnableBigInt(undefined);",
+									"        }",
+									"        const responseData = pm.response.json();",
+									"",
+									"pm.test(\"Response status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response should be an object and should have the correct movie details\", function () {",
+									"    const environmentId = pm.environment.get(\"id\");",
+									"    const environmentTitle = pm.environment.get(\"title\");",
+									"    const environmentProductionDate = pm.environment.get(\"productionDate\");",
+									"    const environmentProducer = pm.environment.get(\"producer\");",
+									"    const environmentRating = pm.environment.get(\"newRating\");",
+									"",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.id).to.eql(parseInt(environmentId));",
+									"    pm.expect(responseData.title).to.eql(environmentTitle);",
+									"    pm.expect(responseData.productionDate).to.eql(environmentProductionDate);",
+									"    pm.expect(responseData.producer).to.eql(environmentProducer);",
+									"    pm.expect(responseData.rating).to.eql(parseFloat(environmentRating));",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/movies/{{id}}",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"movies",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET all movies after edit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"        if (JSON.setEnableBigInt) {",
+									"          JSON.setEnableBigInt(undefined);",
+									"        }",
+									"        const responseData = pm.response.json();",
+									"",
+									"pm.test(\"Response status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response should be an array with objects and should have the correct movie details\", function () {",
+									"const environmentId = pm.environment.get(\"id\");",
+									"const environmentTitle = pm.environment.get(\"title\");",
+									"const environmentProductionDate = pm.environment.get(\"productionDate\");",
+									"const environmentProducer = pm.environment.get(\"producer\");",
+									"const environmentRating = pm.environment.get(\"newRating\");",
+									"",
+									"    pm.expect(responseData).to.be.an('array');",
+									"    responseData.forEach((movie) => {",
+									"    pm.expect(movie.id).to.eql(parseInt(environmentId));",
+									"    pm.expect(movie.title).to.eql(environmentTitle);",
+									"    pm.expect(movie.productionDate).to.eql(environmentProductionDate);",
+									"    pm.expect(movie.producer).to.eql(environmentProducer);",
+									"    pm.expect(movie.rating).to.eql(parseFloat(environmentRating));",
+									"});",
+									"});",
+									"      "
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/movies",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE movie by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/movies/{{id}}",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"movies",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": 1,
+			"type": "string"
+		},
+		{
+			"key": "title",
+			"value": "Hachiko",
+			"type": "string"
+		},
+		{
+			"key": "productionDate",
+			"value": "2009-06-13",
+			"type": "string"
+		},
+		{
+			"key": "producer",
+			"value": "Richard Gere",
+			"type": "string"
+		},
+		{
+			"key": "rating",
+			"value": 8.5,
+			"type": "string"
+		},
+		{
+			"key": "BASE_URL",
+			"value": "http://localhost:3000"
+		}
+	]
 }
