@@ -68,8 +68,7 @@ Open Apidog.
 Import the collection choose apidog format file from the apidog directory:
 <img width="440" alt="ApiDog_import_instruction" src="https://github.com/MildaRuz/node.js_postman_testing_project1/assets/145338483/8bb0cc0b-fdc8-49b6-b41c-db3218567f4e">
 
-and go to Tests, Movie folder, select one or all scenarios and click <img width="161" alt="APIdog_Run_button" src="https://github.com/MildaRuz/node.js_postman_testing_project1/assets/145338483/63394545-ad98-4b15-b097-ee8d619b0df1">
-to execute the tests.
+and go to Tests, Movie folder, select one or all scenarios and click Batch Run button to execute the tests.
 <img width="440" alt="RunTests_instruction" src="https://github.com/MildaRuz/node.js_postman_testing_project1/assets/145338483/8fad947f-dca1-44e8-80fd-e3ba3c4b4bd7">
 
 **Running Tests via CLI**
